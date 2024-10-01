@@ -77,7 +77,6 @@ void inicializar()
 
 void insere()
 {
-	// aloca memoria dinamicamente para o novo elemento
 	NO* novo = (NO*)malloc(sizeof(NO));
 	if (novo == NULL)
 	{
@@ -87,14 +86,34 @@ void insere()
 	cout << "Digite o elemento: ";
 	cin >> novo->valor;
 	novo->prox = NULL;
-
-
+	
+	if (inicio) {
+		fim->prox = novo;
+		fim = novo;
+	}
+	else {
+		inicio = novo;
+		fim = novo;
+	}
 }
 
 void remove()
 {
-
-
-
+	NO* aux = inicio;
+	if (inicio) {
+		int valorDigitado = NULL;
+		cout << "Deseja realmente excluir o elemento '" << aux->valor << "'? Se desejar cancelar digite 0, caso contrario digite qualquer outro numero." << endl;
+		cin >> valorDigitado;
+		if (valorDigitado == 0) {
+			return;
+		}
+		else {
+			inicio = inicio->prox;
+			free(aux);
+		}
+	}
+	else {
+		cout << "Nao existe nenhum elemento na lista" << endl;
+	}
 }
 
